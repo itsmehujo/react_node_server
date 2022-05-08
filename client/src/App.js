@@ -11,11 +11,21 @@ function App() {
         </p>
         <a
           className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/auth/google"
         >
-          Learn React
+          Sign in with Google
+        </a>
+        <a
+          className="App-link"
+          href="/api/current_user"
+        >
+          Check user
+        </a>
+        <a
+          className="App-link"
+          href="/api/logout"
+        >
+          Logout
         </a>
       </header>
     </div>
