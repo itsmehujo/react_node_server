@@ -1,7 +1,25 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
+import {connect} from 'react-redux'
+
 
 class Header extends Component {
+
+  renderContent() {
+    switch(this.props.auth) {
+      case null:
+        return
+      case false:
+        return (
+          <li><a href='/auth/google'>Log in with Google</a></li>
+        )
+      default: 
+        return (
+        <li><a href='/api/logout'>Logout</a></li>
+        )
+    }
+  }
+
   render () {
     return(
     <header>
@@ -11,11 +29,7 @@ class Header extends Component {
         style={{paddingLeft: '2%', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '1.5em'}}
         >itsmehujo</NavLink>
         <ul className='right'>
-          <li>
-            <a
-              href={'/auth/google'}
-              >Log in with Google</a>
-          </li>
+          {this.renderContent()}
         </ul>
       </div>
     </nav>
@@ -23,5 +37,9 @@ class Header extends Component {
   )}
 }
 
-export default Header;
+const mapStateToProps = ({auth}) => ({
+  auth
+})
+
+export default connect(mapStateToProps)(Header);
 

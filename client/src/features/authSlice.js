@@ -2,25 +2,21 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const fetchUser = createAsyncThunk('auth/fetchUser', async (thunkApi) => {
-  try {
-    const {data} = await axios.get('/api/current_user')
-    return data
-  } catch (e) {
-    return e
-  }
+    const {data, status} = await axios.get('/api/current_user')
+    return status === 200 ? data : false
 })
 
 
 const authSlice = createSlice({
   name: 'auth',
-  initialState: {profile: {}},
+  initialState: {},
   reducers: {},
   extraReducers: {
-    [fetchUser.fulfilled]: (state, {payload}) => {
-      state.profile = payload
-    },
+    [fetchUser.pending]: state => null,
+    [fetchUser.fulfilled]: (state, {payload}) => payload || false,
     [fetchUser.rejected]: (state, {payload}) => {
-      state.error = payload
+      state = false
+      console.log(payload)
     }
   }
 })
