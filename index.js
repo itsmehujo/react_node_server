@@ -11,7 +11,7 @@ const app = express()
 
 app.use(cookieSession({
   maxAge: 30 * 24 * 60 * 60 * 1000,
-  keys: [...cookieKeys]
+  keys: [...cookieKeys.split(' ')]
 }))
 
 app.use(passport.initialize())
