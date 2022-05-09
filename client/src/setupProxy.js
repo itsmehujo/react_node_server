@@ -13,10 +13,4 @@ module.exports = function(app) {
       target: 'http://localhost:5050'
     })
   );
-  app.use(
-    '/payment',
-    createProxyMiddleware({
-      target: 'http://localhost:5050'
-    })
-  )
 };

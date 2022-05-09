@@ -6,7 +6,8 @@ import Header from './Header'
 import Footer from './Footer'
 import {Home, Dashboard, NewSurvey} from './'
 import Error404 from './Error404'
-import CheckoutForm from './CheckoutForm'
+import Payment from './Payment/Payment'
+import StripeSuccess from './Payment/StripeSuccess'
 import {fetchUser} from '../features/authSlice'
 
 import '../style/main.scss'
@@ -26,7 +27,8 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
         <Route path ='/surveys' element={<Dashboard/>}/>
         <Route path='/surveys/new' element={<NewSurvey/>}/>
-        <Route path='/checkout_form' element={<CheckoutForm/>}/>
+        <Route path='/checkout' element={<Payment/>}/>
+        <Route path='/payment/success' element={<StripeSuccess/>}/>
       </Routes>
       <Footer/>
   </BrowserRouter>)

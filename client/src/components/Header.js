@@ -31,7 +31,7 @@ class Header extends Component {
     <nav>
         <ul>
           {this.renderContent()}
-          <NavLink to='/checkout_form'>Checkout</NavLink>
+          <NavLink to='/checkout'>Checkout</NavLink>
         </ul>
     </nav>
   </header>
