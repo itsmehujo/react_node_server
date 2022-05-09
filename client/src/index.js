@@ -2,13 +2,14 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {configureStore} from '@reduxjs/toolkit'
-import { authReducer } from './features'
+import { authReducer, paymentReducer } from './features'
 
 import App from './components/App'
 
 const store = configureStore({
   reducer: {
-    auth: authReducer
+    auth: authReducer,
+    stripe: paymentReducer
   }
 })
 
