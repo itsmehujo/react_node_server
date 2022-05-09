@@ -9,6 +9,7 @@ require('./services/passport')
 mongoose.connect(mongoURI)
 const app = express()
 
+// MIDDLEWARES
 app.use(cookieSession({
   maxAge: 30 * 24 * 60 * 60 * 1000,
   keys: [...cookieKeys.split(' ')]
@@ -16,6 +17,7 @@ app.use(cookieSession({
 
 app.use(passport.initialize())
 app.use(passport.session())
+
 
 require('./routes/authRoutes')(app)
 
