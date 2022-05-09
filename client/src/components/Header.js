@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {NavLink} from 'react-router-dom'
 import {connect} from 'react-redux'
+import '../style/header.scss'
 
 
 class Header extends Component {
@@ -22,16 +23,15 @@ class Header extends Component {
 
   render () {
     return(
-    <header>
+    <header id='main-header'>
+      <NavLink 
+      to={this.props.auth ? '/surveys' : '/'} 
+      className={'logo'}
+        >itsfeedback</NavLink>
     <nav>
-      <div className='nav-wrapper'>
-        <NavLink to='/'
-        style={{paddingLeft: '2%', textTransform: 'uppercase', fontWeight: 'bold', fontSize: '1.5em'}}
-        >itsmehujo</NavLink>
-        <ul className='right'>
+        <ul>
           {this.renderContent()}
         </ul>
-      </div>
     </nav>
   </header>
   )}

@@ -3,9 +3,12 @@ import {BrowserRouter, Routes, Route} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 
 import Header from './Header'
+import Footer from './Footer'
 import {Home, Dashboard, NewSurvey} from './'
 import Error404 from './Error404'
 import {fetchUser} from '../features/authSlice'
+
+import '../style/main.scss'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -17,14 +20,13 @@ const App = () => {
   return(
   <BrowserRouter>
     <Header/>
-    <div className='row' style={{padding: '2em'}}>
       <Routes>
         <Route path='*' element={<Error404/>}></Route>
         <Route path='/' element={<Home/>}/>
         <Route path ='/surveys' element={<Dashboard/>}/>
         <Route path='/surveys/new' element={<NewSurvey/>}/>
       </Routes>
-    </div>
+      <Footer/>
   </BrowserRouter>)
 }
 

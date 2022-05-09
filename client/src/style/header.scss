@@ -1,0 +1,31 @@
+@import './variables.scss';
+
+#main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: $blue;
+  padding: 1em;
+  width: 100vw;
+
+  a.logo {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 1.5em;
+    color: $bg;
+
+    &.active {
+      color: $black;
+    }
+  }
+
+  nav {
+
+    ul {
+      display: flex;
+      justify-content: flex-end;
+      color: $bg;
+      list-style: none;
+    }
+  }
+}

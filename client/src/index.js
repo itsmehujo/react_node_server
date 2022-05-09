@@ -5,7 +5,6 @@ import {configureStore} from '@reduxjs/toolkit'
 import { authReducer } from './features'
 
 import App from './components/App'
-import 'materialize-css/dist/css/materialize.min.css'
 
 const store = configureStore({
   reducer: {
