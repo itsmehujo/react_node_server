@@ -1,6 +1,6 @@
 import React from 'react'
 
 const NewSurvey = () => {
-  return(<>New Survey</>)
+  return(<main>New Survey</main>)
 }
 export default NewSurvey

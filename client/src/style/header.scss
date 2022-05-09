@@ -1,18 +1,21 @@
 @import './variables.scss';
 
 #main-header {
-  display: flex;
+  display: grid;
   justify-content: space-between;
   align-items: center;
   background-color: $blue;
   padding: 1em;
   width: 100vw;
 
-  a.logo {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 1.5em;
-    color: $bg;
+  a {
+    &.logo {
+      grid-column: 1 / 2;
+      text-transform: uppercase;
+      font-weight: bold;
+      font-size: 1.5em;
+      color: $bg;
+    }
 
     &.active {
       color: $black;
@@ -20,11 +23,13 @@
   }
 
   nav {
+    grid-column: 2 / 5;
 
     ul {
       display: flex;
       gap: 2%;
       justify-content: flex-end;
+      align-items: center;
       color: $bg;
       list-style: none;
     }
