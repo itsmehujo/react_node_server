@@ -20,6 +20,13 @@
     &.active {
       color: $black;
     }
+
+    &.button {
+      border-radius: 5px;
+      border: 1px solid black;
+      background: $pink;
+      padding: 1% 2%;
+    }
   }
 
   nav {

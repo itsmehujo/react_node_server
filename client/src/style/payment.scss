@@ -1,6 +1,12 @@
 #payment {
   display: flex;
+  flex-direction: column;
   justify-content: center;
+
+  span {
+    text-align: center;
+    margin-bottom: 2vh;
+  }
 
   form {
     background-color: white;

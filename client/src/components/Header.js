@@ -15,9 +15,12 @@ class Header extends Component {
           <li><a href='/auth/google'>Log in with Google</a></li>
         )
       default: 
-        return (
+        return (<>
+        <NavLink 
+        className={'button'}
+        to='/choose_tokens'>Add credits</NavLink>
         <li><a href='/api/logout'>Logout</a></li>
-        )
+        </>)
     }
   }
 
@@ -31,7 +34,6 @@ class Header extends Component {
     <nav>
         <ul>
           {this.renderContent()}
-          <NavLink to='/checkout'>Checkout</NavLink>
         </ul>
     </nav>
   </header>

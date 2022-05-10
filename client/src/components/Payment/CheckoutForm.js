@@ -4,9 +4,8 @@ import {
   useStripe,
   useElements
 } from "@stripe/react-stripe-js";
-import axios from 'axios'
 
-const CheckoutForm = ({tokens}) => {
+const CheckoutForm = ({price}) => {
   const stripe = useStripe();
   const elements = useElements();
 
@@ -56,7 +55,7 @@ const CheckoutForm = ({tokens}) => {
       <PaymentElement id="payment-element" />
       <button disabled={isLoading || !stripe || !elements} id="submit">
         <span id="button-text">
-          {isLoading ? <div className="spinner" id="spinner"></div> : `Pay now ${tokens * 10} €`}
+          {isLoading ? <div className="spinner" id="spinner"></div> : `Pay now ${price} €`}
         </span>
       </button>
       {message && <div id="payment-message">{message}</div>}

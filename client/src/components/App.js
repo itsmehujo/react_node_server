@@ -11,6 +11,7 @@ import StripeSuccess from './Payment/StripeSuccess'
 import {fetchUser} from '../features/authSlice'
 
 import '../style/main.scss'
+import ChooseTokens from './Payment/ChooseTokens'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -27,6 +28,7 @@ const App = () => {
         <Route path='/' element={<Home/>}/>
         <Route path ='/surveys' element={<Dashboard/>}/>
         <Route path='/surveys/new' element={<NewSurvey/>}/>
+        <Route path='/choose_tokens' element={<ChooseTokens/>}/>
         <Route path='/checkout' element={<Payment/>}/>
         <Route path='/payment/success' element={<StripeSuccess/>}/>
       </Routes>

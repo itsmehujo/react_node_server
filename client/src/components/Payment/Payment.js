@@ -9,7 +9,7 @@ import '../../style/payment.scss'
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 
 const Payment = () => {
-  const {tokens} = useSelector(state => state.cart)
+  const {tokens, price, name} = useSelector(store => store.cart) 
   const [clientSecret, setClientSecret] = useState("")
   useEffect(() => {
     (async () => {
@@ -18,6 +18,7 @@ const Payment = () => {
     })()
   }, [tokens])
 
+
   const options = {
     clientSecret,
     appearance: {
@@ -25,10 +26,11 @@ const Payment = () => {
     }
   }
   return(<main id='payment'>
+    <span>You chose the {name} package, with {tokens} tokens</span>
     { clientSecret &&
     <Elements stripe={stripePromise} options={options}>
       <CheckoutForm
-      tokens={tokens}/>
+      price={price}/>
     </Elements>}
   </main>)
 }
