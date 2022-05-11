@@ -4,6 +4,7 @@ import {useDispatch} from 'react-redux'
 
 import Header from './Header'
 import Footer from './Footer'
+import Page from './Page'
 import {Home, Dashboard, NewSurvey} from './'
 import Error404 from './Error404'
 import Payment from './Payment/Payment'
@@ -24,13 +25,34 @@ const App = () => {
   <BrowserRouter>
     <Header/>
       <Routes>
-        <Route path='*' element={<Error404/>}></Route>
-        <Route path='/' element={<Home/>}/>
-        <Route path ='/surveys' element={<Dashboard/>}/>
-        <Route path='/surveys/new' element={<NewSurvey/>}/>
-        <Route path='/choose_tokens' element={<ChooseTokens/>}/>
-        <Route path='/checkout' element={<Payment/>}/>
-        <Route path='/payment/success' element={<StripeSuccess/>}/>
+        <Route path='*' 
+        element={<Page title='Error 404 !'>
+          <Error404/>
+        </Page>}/>
+        <Route path='/' 
+        element={<Page title='Home'>
+        <Home/>
+        </Page>}/>
+        <Route path ='/surveys' 
+        element={<Page title='Dashboard'>
+        <Dashboard/>
+        </Page>}/>
+        <Route path='/surveys/new' 
+        element={<Page title='New survey'>
+        <NewSurvey/>
+        </Page>}/>
+        <Route path='/choose_tokens' 
+        element={<Page title='Choose your package'>
+        <ChooseTokens/>
+        </Page>}/>
+        <Route path='/checkout' 
+        element={<Page title='Checkout'>
+        <Payment/>
+        </Page>}/>
+        <Route path='/payment/success' 
+        element={<Page title='Success !'>
+        <StripeSuccess/>
+        </Page>}/>
       </Routes>
       <Footer/>
   </BrowserRouter>)

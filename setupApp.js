@@ -2,8 +2,6 @@ const express = require('express')
 const passport = require('passport')
 const cookieSession = require('cookie-session')
 const { cookieKeys } = require('./config/keys')
-
-
 const app = express()
 
 // MIDDLEWARES
