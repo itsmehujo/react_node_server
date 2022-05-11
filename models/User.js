@@ -5,6 +5,10 @@ const userSchema = new Schema({
   googleID: {
     type: String,
     unique: true
+  },
+  credits: {
+    type: Number,
+    default: 0
   }
 })
 

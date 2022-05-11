@@ -1,13 +1,19 @@
-import React, {Component} from 'react'
+import React, {useState, useEffect} from 'react'
 import {NavLink} from 'react-router-dom'
-import {connect} from 'react-redux'
+import {useSelector} from 'react-redux'
 import '../style/header.scss'
 
 
-class Header extends Component {
+const Header = () => {
+  const auth = useSelector(store => store.auth)
+  const [profile, setProfile] = useState({})
 
-  renderContent() {
-    switch(this.props.auth) {
+  useEffect(() => {
+    setProfile(auth)
+  }, [auth])
+
+  const renderContent = () => {
+    switch(profile) {
       case null:
         return
       case false:
@@ -16,6 +22,7 @@ class Header extends Component {
         )
       default: 
         return (<>
+        <span>{profile.credits} credits</span>
         <NavLink 
         className={'button'}
         to='/choose_tokens'>Add credits</NavLink>
@@ -24,25 +31,21 @@ class Header extends Component {
     }
   }
 
-  render () {
-    return(
+  return ( 
     <header id='main-header'>
       <NavLink 
-      to={this.props.auth ? '/surveys' : '/'} 
+      to={profile ? '/surveys' : '/'} 
       className={'logo'}
         >itsfeedback</NavLink>
     <nav>
         <ul>
-          {this.renderContent()}
+          {renderContent()}
         </ul>
     </nav>
   </header>
-  )}
+  )
 }
 
-const mapStateToProps = ({auth}) => ({
-  auth
-})
 
-export default connect(mapStateToProps)(Header);
+export default Header
 

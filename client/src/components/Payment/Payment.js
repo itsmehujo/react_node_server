@@ -9,7 +9,8 @@ import '../../style/payment.scss'
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 
 const Payment = () => {
-  const {tokens, price, name} = useSelector(store => store.cart) 
+  const {tokens, price, name} = useSelector(state => state.cart)
+  const profile = useSelector(state => state.auth)
   const [clientSecret, setClientSecret] = useState("")
   useEffect(() => {
     (async () => {
@@ -18,15 +19,15 @@ const Payment = () => {
     })()
   }, [tokens])
 
-
   const options = {
     clientSecret,
     appearance: {
       theme: 'stripe'
     }
   }
-  return(<main id='payment'>
-    <span>You chose the {name} package, with {tokens} tokens</span>
+  return( profile && 
+  <main id='payment'>
+    <span>You chose the {name} package with {tokens} tokens</span>
     { clientSecret &&
     <Elements stripe={stripePromise} options={options}>
       <CheckoutForm

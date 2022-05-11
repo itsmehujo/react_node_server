@@ -1,31 +1,16 @@
-const { stripeSecretKey } = require('../config/keys')
-const stripe = require('stripe')(stripeSecretKey)
+const express = require('express')
+const paymentController = require('../controllers/paymentController')
+const requireLogin = require('../middlewares/requireLogin')
+const router = express.Router()
 
-module.exports = (app) => {
-  app.post("/api/payment/create-payment-intent", async (req, res) => {
-    const { tokens } = req.body
-    const paymentIntent = await stripe.paymentIntents.create({
-      amount: 1000 * tokens,
-      currency: "eur",
-      automatic_payment_methods: {
-        enabled: true,
-      }
-    })
-    res.send({
-      clientSecret: paymentIntent.client_secret,
-    })
-  })
-  app.post('/api/payment/success', async (req, res) => {
-    const { paymentIntent, profile } = req.body
-    if (paymentIntent.status === 'succeeded' && profile) {
-      res.send({
-        paymentIntent,
-        profile
-      })
-    } else {
-      res.send({
-        status: 'fail'
-      })
-    }
-  })
-}
+router.use(requireLogin)
+
+router
+  .route('/create-payment-intent')
+  .post(paymentController.createPaymentIntent)
+
+router
+  .route('/success')
+  .post(paymentController.paymentSuccess)
+
+module.exports = router

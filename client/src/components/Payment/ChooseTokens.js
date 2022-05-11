@@ -1,10 +1,11 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { Link } from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import {updateCart} from '../../features/cartSlice'
 import '../../style/choose_tokens.scss'
 
 const ChooseTokens = () => {
+  const profile = useSelector(state => state.auth)
   const dispatch = useDispatch()
   const [chosenPackage, setChosenPackage] = useState({name: 'standard', tokens: 10, price: 10})
   const packages = useRef()
@@ -66,10 +67,13 @@ const ChooseTokens = () => {
       >I need the cream of the crop.</button>
       </div>
     </div>
-    <Link to='/checkout'
-    className='checkout_link'>
+    { profile ?
+      <Link to='/checkout'
+      className='checkout_link'>
       Go to checkout ({ chosenPackage.price }€)
     </Link>
+    : <span className='checkout_link'>Please log in to continue</span>
+    }
   </main>)
 }
 

@@ -2,7 +2,7 @@ import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
 import axios from 'axios'
 
 export const fetchUser = createAsyncThunk('auth/fetchUser', async (thunkApi) => {
-    const {data, status} = await axios.get('/api/current_user')
+    const {data, status} = await axios.get('/api/user/current_user')
     return status === 200 ? data : false
 })
 

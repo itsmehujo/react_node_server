@@ -1,12 +1,17 @@
 const express = require('express')
 const mongoose = require('mongoose')
-const cookieSession = require('cookie-session')
 const passport = require('passport')
+const cookieSession = require('cookie-session')
 const { mongoURI, cookieKeys } = require('./config/keys')
 require('./models/User')
 require('./services/passport')
+const authRouter = require('./routes/authRoutes')
+const apiAuthRouter = require('./routes/apiAuthRoutes')
+const paymentRouter = require('./routes/paymentRoutes')
 
 mongoose.connect(mongoURI)
+  .catch((e) => console.error(e))
+
 const app = express()
 
 // MIDDLEWARES
@@ -20,8 +25,9 @@ app.use(passport.session())
 app.use(express.json())
 
 
-require('./routes/authRoutes')(app)
-require('./routes/paymentRoutes')(app)
+app.use('/auth/google', authRouter)
+app.use('/api/user', apiAuthRouter)
+app.use('/api/payment', paymentRouter)
 
 
 const PORT = process.env.PORT || 5050
