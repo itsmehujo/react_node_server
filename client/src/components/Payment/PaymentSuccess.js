@@ -1,9 +1,12 @@
 import {useEffect} from 'react'
+import { useDispatch } from 'react-redux'
+import { fetchUser } from '../../features/authSlice'
 import {useStripe} from '@stripe/react-stripe-js'
 import axios from 'axios'
 
 const PaymentSuccess = ({clientSecret}) => {
   const stripe = useStripe()
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if(!stripe) {
@@ -15,7 +18,7 @@ const PaymentSuccess = ({clientSecret}) => {
         paymentIntent
       }
       const {data} = await axios.post('/api/payment/success', body)
-      console.log(data)
+      dispatch(fetchUser())
     })()
   }, [stripe])
 
