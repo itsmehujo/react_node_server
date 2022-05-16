@@ -1,8 +1,10 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { Link } from 'react-router-dom'
 import {useDispatch, useSelector} from 'react-redux'
+
 import {updateCart} from '../../features/cartSlice'
-import '../../style/choose_tokens.scss'
+
+import './style/choose_tokens.scss'
 
 const ChooseTokens = () => {
   const profile = useSelector(state => state.auth)

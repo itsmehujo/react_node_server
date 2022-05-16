@@ -1,11 +1,12 @@
-import React, {useState} from 'react'
+import React from 'react'
 import {useSelector} from 'react-redux'
-import { Navigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 const ConfirmSurvey = () => {
-  const [needToRedirect, setNeedToRedirect] = useState(false)
   const {title, subject, body, recipients} = useSelector(state => state.form)
+  const navigate = useNavigate()
+  
   const sendForm = async () => {
     const res = await axios.post('/api/surveys', {
       title,
@@ -35,9 +36,8 @@ const ConfirmSurvey = () => {
       Looks alright ? <button onClick={sendForm}>Send survey !</button>
     </div>
     <div>
-    Something's off ? <button onClick={() => setNeedToRedirect(true)}>Change the survey</button>
+    Something's off ? <button onClick={() => navigate('/surveys/new')}>Change the survey</button>
     </div>
-    {needToRedirect ? <Navigate to='/surveys/new'/> : null}
   </main>)
 }
 

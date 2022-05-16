@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import {Elements} from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js'
-import CheckoutForm from './CheckoutForm'
-import axios from 'axios'
 import {useSelector} from 'react-redux'
-import '../../style/payment.scss'
+import axios from 'axios'
+
+import CheckoutForm from './CheckoutForm'
+
+import './style/payment.scss'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 

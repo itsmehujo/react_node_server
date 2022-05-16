@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import {NavLink} from 'react-router-dom'
 import {useSelector} from 'react-redux'
-import '../style/header.scss'
+
+import './style/header.scss'
 
 
 const Header = () => {

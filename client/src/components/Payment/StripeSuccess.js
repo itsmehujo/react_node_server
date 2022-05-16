@@ -1,6 +1,7 @@
 import React from 'react'
 import {Elements} from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js'
+
 import PaymentSuccess from './PaymentSuccess'
 
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)

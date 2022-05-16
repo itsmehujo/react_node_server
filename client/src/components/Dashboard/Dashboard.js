@@ -1,7 +1,8 @@
 import React from 'react'
+
 import DashboardNav from './DashboardNav'
 
-import '../style/dashboard.scss'
+import './style/dashboard.scss'
 
 const Dashboard = (props) => {
   return(<main id='dashboard'>

@@ -1,9 +1,11 @@
-import React, {useState} from 'react'
-import {Formik, Form, Field, FieldArray, ErrorMessage} from 'formik'
-import '../style/survey_form.scss'
-import {Navigate} from 'react-router-dom'
+import React from 'react'
+import {useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { updateForm } from '../features/formSlice'
+import {Formik, Form, Field, FieldArray, ErrorMessage} from 'formik'
+
+import { updateForm } from '../../features/formSlice'
+
+import './style/survey_form.scss'
 
 const validate = values => {
   const errors = {};
@@ -26,9 +28,9 @@ const validate = values => {
 };
 
 const SurveyForm = () => {
-  const [formSent, setFormSent] = useState(false)
   const defaultForm = useSelector(state => state.form)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const checkEmail = (email) => {
     return email.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)
@@ -59,7 +61,6 @@ const SurveyForm = () => {
   
   return(<main
     id="survey_form">
-      {formSent ? <Navigate to='/surveys/new/confirm'/> : null}
       <h2>Create a new survey !</h2>
       <Formik
        initialValues={{ survey_title: defaultForm.title, subject_line: defaultForm.subject, email_body: defaultForm.body, recipients_list: defaultForm.recipients, new_recipient: '' }}
@@ -74,7 +75,7 @@ const SurveyForm = () => {
 
         form.setSubmitting(false)
         form.resetForm()
-        setFormSent(true)
+        navigate('/surveys/new/confirm')
        }}
      >
        {({values, isSubmitting, submitCount}) => (
