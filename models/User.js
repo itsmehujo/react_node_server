@@ -6,6 +6,9 @@ const userSchema = new Schema({
     type: String,
     unique: true
   },
+  lastPaymentIntent: {
+    type: String
+  },
   credits: {
     type: Number,
     default: 0

@@ -35,8 +35,9 @@ exports.createPaymentIntent = async (req, res) => {
 // In production, replace with Stripe hooks
 exports.paymentSuccess = async (req, res) => {
   const { paymentIntent } = req.body
-  if (paymentIntent.status === 'succeeded') {
+  if (paymentIntent.status === 'succeeded' && paymentIntent.id !== req.user.lastPaymentIntent) {
     req.user.credits += getTokensForPrice(paymentIntent)
+    req.user.lastPaymentIntent = paymentIntent.id
     const user = await req.user.save()
     res.send({
       paymentIntent,

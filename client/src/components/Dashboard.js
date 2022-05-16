@@ -1,6 +1,11 @@
 import React from 'react'
+import SurveyFormik from './SurveyFormik'
+import '../style/dashboard.scss'
 
 const Dashboard = () => {
-  return(<main>Dashboard</main>)
+  return(<main id='dashboard'>
+    <SurveyFormik/>
+    
+    </main>)
 }
 export default Dashboard

@@ -6,6 +6,9 @@ import { authReducer, cartReducer } from './features'
 
 import App from './components/App'
 
+const axios = require('axios')
+window.axios = axios
+
 const store = configureStore({
   reducer: {
     auth: authReducer,

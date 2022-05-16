@@ -5,6 +5,9 @@ exports.authenticateLogin = (req, res, next) => {
   next()
 }
 
-exports.loginGoogle = () => passport.authenticate('google', { scope: ['profile', 'email'] })
+exports.loginGoogle = (req, res) => {
+  console.log('login with google')
+  passport.authenticate('google')
+}
 
 exports.confirmLogin = (req, res) => res.redirect('/surveys')

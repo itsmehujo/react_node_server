@@ -1,0 +1,49 @@
+#survey_form {
+  width: 75vw;
+
+  h2 {
+    font-size: 1.4em;
+    font-weight: 600;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    label {
+      display: flex;
+      flex-direction: column;
+      margin: 1em 0;
+
+      .error {
+        color: red;
+      }
+
+      input,
+      textarea {
+        margin: 0.4em 0;
+        background: none;
+        border-bottom: 1px solid black;
+
+        &:focus {
+          outline: none;
+        }
+      }
+
+      .recipients {
+        display: flex;
+        gap: 1em;
+
+        .recipient {
+          border: 1px solid black;
+          border-radius: 5px;
+          padding: 0.2em 0.5em;
+        }
+      }
+    }
+
+    >* {
+      max-width: max-content;
+    }
+  }
+}

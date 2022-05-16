@@ -18,7 +18,7 @@ const Header = () => {
         return
       case false:
         return (
-          <li><a href='/auth/google'>Log in with Google</a></li>
+          <li><a href='/api/auth/google'>Log in with Google</a></li>
         )
       default: 
         return (<>
@@ -26,7 +26,7 @@ const Header = () => {
         <NavLink 
         className={'button'}
         to='/choose_tokens'>Add credits</NavLink>
-        <li><a href='/api/logout'>Logout</a></li>
+        <li><a href='/api/user/logout'>Logout</a></li>
         </>)
     }
   }

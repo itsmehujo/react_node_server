@@ -3,10 +3,11 @@ require('./database')
 require('./services/passport')
 
 
-app.use('/auth/google', require('./routes/authRoutes'))
 app.use('/api/user', require('./routes/apiAuthRoutes'))
 app.use('/api/payment', require('./routes/paymentRoutes'))
+app.use('/api/surveys', require('./routes/surveyRoutes'))
 
+app.use('/api/auth', require('./routes/authRoutes'))
 
 
 if (process.env.NODE_ENV === 'production') {

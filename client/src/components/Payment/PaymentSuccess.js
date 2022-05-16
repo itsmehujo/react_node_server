@@ -18,6 +18,7 @@ const PaymentSuccess = ({clientSecret}) => {
         paymentIntent
       }
       const {data} = await axios.post('/api/payment/success', body)
+      console.log(data)
       dispatch(fetchUser())
     })()
   }, [stripe])
