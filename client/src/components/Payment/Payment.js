@@ -9,15 +9,15 @@ import '../../style/payment.scss'
 const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_KEY)
 
 const Payment = () => {
-  const {tokens, price, name} = useSelector(state => state.cart)
+  const cart = useSelector(state => state.cart)
   const profile = useSelector(state => state.auth)
   const [clientSecret, setClientSecret] = useState("")
   useEffect(() => {
     (async () => {
-      const {status, data} = await axios.post('/api/payment/create-payment-intent', {tokens})
+      const {status, data} = await axios.post('/api/payment/create-payment-intent', cart)
       status === 200 ? setClientSecret(data.clientSecret) : setClientSecret(false)
     })()
-  }, [tokens])
+  }, cart)
 
   const options = {
     clientSecret,
@@ -27,11 +27,11 @@ const Payment = () => {
   }
   return( profile && 
   <main id='payment'>
-    <span>You chose the {name} package with {tokens} tokens</span>
+    <span>You chose the {cart.name} package with {cart.tokens} tokens</span>
     { clientSecret &&
     <Elements stripe={stripePromise} options={options}>
       <CheckoutForm
-      price={price}/>
+      price={cart.price}/>
     </Elements>}
   </main>)
 }

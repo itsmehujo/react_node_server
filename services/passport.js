@@ -1,7 +1,7 @@
 const { googleClientID, googleClientSecret } = require('../config/keys')
-const passport = require('passport')
 const GoogleStrategy = require('passport-google-oauth20').Strategy
 const mongoose = require('mongoose')
+const passport = require('passport')
 const User = mongoose.model('users')
 
 passport.serializeUser((user, done) => {

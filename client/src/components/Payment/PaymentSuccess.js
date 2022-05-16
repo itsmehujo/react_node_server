@@ -14,11 +14,7 @@ const PaymentSuccess = ({clientSecret}) => {
     }
     (async() => {
       const {paymentIntent} = await stripe.retrievePaymentIntent(clientSecret)
-      const body = {
-        paymentIntent
-      }
-      const {data} = await axios.post('/api/payment/success', body)
-      console.log(data)
+      const {data} = await axios.post('/api/payment/success', paymentIntent)
       dispatch(fetchUser())
     })()
   }, [stripe])

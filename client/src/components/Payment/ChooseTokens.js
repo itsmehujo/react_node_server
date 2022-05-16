@@ -30,7 +30,7 @@ const ChooseTokens = () => {
     setChosenPackage(getPackage(chosenPackage))
   }
 
-  return(<main id='choose_tokens' ref={packages}>
+  return(<main id='choose_tokens' ref={packages} className='standard__chosen'>
     <h1>Please choose your package</h1>
     <div className='packages'>
       <div className='standard'>

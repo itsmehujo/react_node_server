@@ -1,13 +1,15 @@
 const express = require('express')
-const authController = require('../controllers/authController')
 const router = express.Router()
+const passport = require('passport')
 
 router
   .route('/google')
-  .get(authController.loginGoogle)
+  .get(passport.authenticate('google', {
+    scope: ['profile', 'email']
+  }))
 
 router
   .route('/google/callback')
-  .get(authController.authenticateLogin, authController.confirmLogin)
+  .get(passport.authenticate('google'), (req, res) => { res.redirect('/surveys') })
 
 module.exports = router

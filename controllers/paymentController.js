@@ -9,19 +9,19 @@ const getPriceForTokens = (tokens) => {
     default: return 9999
   }
 }
-const getTokensForPrice = ({ amount }) => {
+const getTokensForPrice = (amount) => {
   switch (amount / 100) {
     case 10: return 10
     case 25: return 30
     case 75: return 100
-    default: return 0
+    default: return 172
   }
 }
 
 exports.createPaymentIntent = async (req, res) => {
-  const { tokens } = req.body
+  const cart = req.body
   const paymentIntent = await stripe.paymentIntents.create({
-    amount: getPriceForTokens(tokens),
+    amount: getPriceForTokens(cart.tokens),
     currency: "eur",
     automatic_payment_methods: {
       enabled: true,
@@ -34,9 +34,9 @@ exports.createPaymentIntent = async (req, res) => {
 
 // In production, replace with Stripe hooks
 exports.paymentSuccess = async (req, res) => {
-  const { paymentIntent } = req.body
+  const paymentIntent = req.body
   if (paymentIntent.status === 'succeeded' && paymentIntent.id !== req.user.lastPaymentIntent) {
-    req.user.credits += getTokensForPrice(paymentIntent)
+    req.user.credits += getTokensForPrice(paymentIntent.amount)
     req.user.lastPaymentIntent = paymentIntent.id
     const user = await req.user.save()
     res.send({
