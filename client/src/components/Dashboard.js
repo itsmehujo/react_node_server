@@ -1,11 +1,12 @@
 import React from 'react'
-import SurveyFormik from './SurveyFormik'
+import DashboardNav from './DashboardNav'
+
 import '../style/dashboard.scss'
 
-const Dashboard = () => {
+const Dashboard = (props) => {
   return(<main id='dashboard'>
-    <SurveyFormik/>
-    
+    { props.showNav ? <DashboardNav/> : null}
+    {props.children ? props.children : null}
     </main>)
 }
 export default Dashboard

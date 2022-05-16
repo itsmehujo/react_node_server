@@ -5,14 +5,17 @@ import {useDispatch} from 'react-redux'
 import Header from './Header'
 import Footer from './Footer'
 import Page from './Page'
-import {Home, Dashboard, NewSurvey} from './'
+import {Home, Dashboard} from './'
 import Error404 from './Error404'
 import Payment from './Payment/Payment'
+import ChooseTokens from './Payment/ChooseTokens'
+import SurveyForm from './SurveyForm'
+import ConfirmSurvey from './ConfirmSurvey'
 import StripeSuccess from './Payment/StripeSuccess'
+
 import {fetchUser} from '../features/authSlice'
 
 import '../style/main.scss'
-import ChooseTokens from './Payment/ChooseTokens'
 
 const App = () => {
   const dispatch = useDispatch()
@@ -35,12 +38,19 @@ const App = () => {
         </Page>}/>
         <Route path ='/surveys' 
         element={<Page title='Dashboard'>
-        <Dashboard/>
+        <Dashboard
+        showNav={true}/>
         </Page>}/>
         <Route path='/surveys/new' 
         element={<Page title='New survey'>
-        <NewSurvey/>
+        <Dashboard
+        showNav={true}>
+          <SurveyForm/>
+        </Dashboard>
         </Page>}/>
+        <Route path='/surveys/new/confirm'
+        element={<Page title='Confirm survey'><ConfirmSurvey/></Page>}
+        />
         <Route path='/choose_tokens' 
         element={<Page title='Choose your package'>
         <ChooseTokens/>

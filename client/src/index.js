@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import {configureStore} from '@reduxjs/toolkit'
-import { authReducer, cartReducer } from './features'
+import { authReducer, cartReducer, formReducer } from './features'
 
 import App from './components/App'
 
@@ -12,7 +12,8 @@ window.axios = axios
 const store = configureStore({
   reducer: {
     auth: authReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    form: formReducer
   }
 })
 

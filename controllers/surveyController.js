@@ -25,3 +25,9 @@ exports.createSurvey = async (req, res) => {
 }
 exports.getSurveys = (req, res) => res.send()
 exports.thankUser = (req, res) => res.send("Thank your for giving your feedback :)")
+
+exports.sendTemplate = (req, res) => {
+  const survey = req.body
+  console.log(survey)
+  res.send(surveyTemplate(survey))
+}

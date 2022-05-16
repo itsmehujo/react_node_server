@@ -13,4 +13,7 @@ router
   .route('/thanks')
   .get(surveyController.thankUser)
 
+router
+  .route('/template')
+  .post(surveyController.sendTemplate)
 module.exports = router
