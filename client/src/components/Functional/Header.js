@@ -34,7 +34,7 @@ const Header = () => {
 
   return ( 
     <header id='main-header'>
-      <NavLink 
+      <NavLink end
       to={profile ? '/surveys' : '/'} 
       className={'logo'}
         >itsfeedback</NavLink>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import {Elements} from '@stripe/react-stripe-js'
 import {loadStripe} from '@stripe/stripe-js'
 import {useSelector} from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 import CheckoutForm from './CheckoutForm'
@@ -14,12 +15,19 @@ const Payment = () => {
   const cart = useSelector(state => state.cart)
   const profile = useSelector(state => state.auth)
   const [clientSecret, setClientSecret] = useState("")
+  const navigate = useNavigate()
+
+
   useEffect(() => {
-    (async () => {
-      const {status, data} = await axios.post('/api/payment/create-payment-intent', cart)
-      status === 200 ? setClientSecret(data.clientSecret) : setClientSecret(false)
-    })()
-  }, cart)
+    if(!profile) {
+      navigate('/')
+    } else {
+      (async () => {
+        const {status, data} = await axios.post('/api/payment/create-payment-intent', cart)
+        status === 200 ? setClientSecret(data.clientSecret) : setClientSecret(false)
+      })()
+    }
+  }, [cart, profile])
 
   const options = {
     clientSecret,

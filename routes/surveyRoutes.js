@@ -3,17 +3,19 @@ const requireLogin = require('../middlewares/requireLogin')
 const checkCredits = require('../middlewares/checkCredits')
 const surveyController = require('../controllers/surveyController')
 const router = express.Router()
-router.use(requireLogin)
+// router.use(requireLogin)
 
 router
   .route('/')
-  .post(checkCredits, surveyController.createSurvey)
-  .get(surveyController.getSurveys)
+  .post(requireLogin, checkCredits, surveyController.createSurvey)
+  .get(requireLogin, surveyController.getSurveys)
+
 router
-  .route('/thanks')
+  .route('/:surveyId/:choice')
   .get(surveyController.thankUser)
 
 router
-  .route('/template')
-  .post(surveyController.sendTemplate)
+  .route('/webhook')
+  .post(surveyController.webHookHandler)
+
 module.exports = router

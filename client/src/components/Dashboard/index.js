@@ -1,1 +1,2 @@
-export {default as Dashboard} from './Dashboard'
+export {default as HOCDashboard} from './HOCDashboard'
+export {default as DashboardView} from './DashboardView'

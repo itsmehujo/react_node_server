@@ -1,19 +1,26 @@
+@import '../../GLOBAL_STYLE/variables.scss';
+
 #survey_form {
-  width: 75vw;
+  width: 100%;
 
   h2 {
     font-size: 1.4em;
     font-weight: 600;
+    text-align: center;
   }
 
   form {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 60%;
+    margin: 0 auto;
 
     label {
       display: flex;
       flex-direction: column;
       margin: 1em 0;
+      width: 100%;
 
       .error {
         color: red;
@@ -33,6 +40,7 @@
       .recipients {
         display: flex;
         gap: 1em;
+        flex-wrap: wrap;
 
         .recipient {
           border: 1px solid black;
@@ -42,8 +50,21 @@
       }
     }
 
-    >* {
-      max-width: max-content;
+    .buttons {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+
+      button {
+        padding: 0.5em 1em;
+        cursor: pointer;
+        background-color: $yellow;
+        border-radius: 5px;
+
+        &:last-child {
+          background-color: $blue;
+        }
+      }
     }
   }
 }

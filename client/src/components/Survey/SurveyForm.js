@@ -7,28 +7,28 @@ import { updateForm } from '../../features/formSlice'
 
 import './style/survey_form.scss'
 
-const validate = values => {
+const validate = ({title, subject, body, recipients}) => {
   const errors = {};
-  if (!values.survey_title) {
-    errors.survey_title = 'Required';
+  if (!title) {
+    errors.title = 'Required';
   }
 
-  if (!values.subject_line) {
-    errors.subject_line = 'Required';
+  if (!subject) {
+    errors.subject = 'Required';
   } 
 
-  if (!values.email_body) {
-    errors.email_body = 'Required';
+  if (!body) {
+    errors.body = 'Required';
   }
 
-  if(values.recipients_list.length < 1) {
-    errors.recipients_list = 'Required'
+  if(recipients.length < 1) {
+    errors.recipients = 'Required'
   }
   return errors;
 };
 
 const SurveyForm = () => {
-  const defaultForm = useSelector(state => state.form)
+  const {title, subject, body, recipients} = useSelector(state => state.form)
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
@@ -39,7 +39,6 @@ const SurveyForm = () => {
   const addRecipient = (e, {form}) => {
     if(e.key === 'Enter') {
       if(form.values.new_recipient) {
-
         // We check that the email is correct
         if(checkEmail(form.values.new_recipient)) {
           // we add the email to the recipients list via a new Set, ensuring that all the emails are unique
@@ -47,7 +46,7 @@ const SurveyForm = () => {
           form.setValues(
             {
               ...form.values,
-              recipients_list: [...new Set([...form.values.recipients_list, form.values.new_recipient])],
+              recipients: [...new Set([...form.values.recipients, form.values.new_recipient])],
               new_recipient: ''
             })
           } else {
@@ -59,55 +58,50 @@ const SurveyForm = () => {
       } 
   }
   
-  return(<main
+  return(<div
     id="survey_form">
       <h2>Create a new survey !</h2>
       <Formik
-       initialValues={{ survey_title: defaultForm.title, subject_line: defaultForm.subject, email_body: defaultForm.body, recipients_list: defaultForm.recipients, new_recipient: '' }}
+       initialValues={{ title, subject, body, recipients, new_recipient: '' }}
        validate={validate}
-       onSubmit={async (values, form) => {
+       onSubmit={async ({title, subject, body, recipients}, form) => {
         dispatch(updateForm({
-          title: values.survey_title,
-          subject: values.subject_line,
-          body: values.email_body,
-          recipients: values.recipients_list
+          title,
+          subject,
+          body,
+          recipients
         }))
-
         form.setSubmitting(false)
         form.resetForm()
         navigate('/surveys/new/confirm')
-       }}
+       }}       
      >
-       {({values, isSubmitting, submitCount}) => (
+       {({values, isSubmitting, validateForm}) => (
          <Form
          onKeyDown={(e) => {
            if(e.key === 'Enter'){ e.preventDefault() }}}
           >
-           <button
-           onClick={() => console.log(values)}
-           type='button'
-           >Show values</button>
            <label>Survey Title
-            <Field type="text" name="survey_title" />
-            <ErrorMessage name="survey_title" component="div" className='error'/>
+            <Field type="text" name="title" />
+            <ErrorMessage name="title" component="div" className='error'/>
           </label>
           <label>
             Subject
-           <Field type="text" name="subject_line" />
-           <ErrorMessage name="subject_line" component="div"  className='error'/>
+           <Field type="text" name="subject" />
+           <ErrorMessage name="subject" component="div"  className='error'/>
            </label>
            <label>
              Email body
-            <Field name='email_body' as='textarea'/>
-            <ErrorMessage name="email_body" component="div"  className='error'/>
+            <Field name='body' as='textarea'/>
+            <ErrorMessage name="body" component="div"  className='error'/>
            </label>
            <label>
              Recipients (enter to add one)
              <FieldArray
-             name='recipients_list'
+             name='recipients'
              render={arrayHelpers => (<>
               <div className='recipients'>
-              {values.recipients_list.map((recipient, i) => (
+              {values.recipients.map((recipient, i) => (
               <span className='recipient'
               key={i}
               onClick={() => arrayHelpers.remove(i)}>
@@ -122,16 +116,22 @@ const SurveyForm = () => {
             </>
              )}
              />
-            <ErrorMessage name="recipients_list" component="div"  className='error'/>
+            <ErrorMessage name="recipients" component="div"  className='error'/>
             <ErrorMessage name="new_recipient" component="div"  className='error'/>
            </label>
-           <button type="submit" disabled={isSubmitting}>
-             Next step
-           </button>
+           <div className='buttons'>
+            <button type='button' onClick={() => {
+              const {title, subject, body, recipients} = values
+              dispatch(updateForm({title,subject,body,recipients}))
+              }}>Save</button>
+            <button type="submit" disabled={isSubmitting}>
+              Next step
+            </button>
+          </div>
          </Form>
        )}
      </Formik>   
-  </main>)
+  </div>)
 }
 
 export default SurveyForm

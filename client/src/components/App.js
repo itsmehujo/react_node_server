@@ -1,29 +1,33 @@
 import React, {useEffect} from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import {useDispatch} from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 
 import {Header, Footer, Page, Error404} from './Functional'
 import {ChooseTokens, Payment, StripeSuccess} from './Payment'
 import {SurveyForm, ConfirmSurvey} from './Survey'
-import {Dashboard} from './Dashboard'
+import {HOCDashboard, DashboardView} from './Dashboard'
 import Home from './Home'
 
-import {fetchUser} from '../features/authSlice'
 
 import './GLOBAL_STYLE/main.scss';
+import { fetchSurveys, fetchUser } from '../features/'
 
 const App = () => {
   const dispatch = useDispatch()
+  const profile = useSelector(state => state.auth)
+  
 
   useEffect(() => {
     dispatch(fetchUser())
+    if(profile) {
+      dispatch(fetchSurveys())
+    }
   }, [])
 
   return(
   <BrowserRouter>
     <Header/>
       <Routes>
-
         <Route path='*' 
         element={
           <Page title='Error 404 !'>
@@ -39,17 +43,19 @@ const App = () => {
         <Route path ='/surveys' 
         element={
           <Page title='Dashboard'>
-          <Dashboard
-          showNav={true}/>
+          <HOCDashboard
+          showNav={true}>
+            <DashboardView/>
+          </HOCDashboard>
         </Page>}/>
 
         <Route path='/surveys/new' 
         element={
           <Page title='New survey'>
-          <Dashboard
+          <HOCDashboard
           showNav={true}>
             <SurveyForm/>
-          </Dashboard>
+          </HOCDashboard>
           </Page>}/>
 
         <Route path='/surveys/new/confirm'

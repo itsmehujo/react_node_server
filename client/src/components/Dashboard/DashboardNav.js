@@ -4,8 +4,14 @@ import { NavLink } from 'react-router-dom'
 const DashboardNav = () => {
   return(
     <nav>
-      <NavLink end to='/surveys'>Dashboard</NavLink>
-      <NavLink to='/surveys/new'>New survey</NavLink>
+      <ul>
+        <li>
+         <NavLink end to='/surveys'>Dashboard</NavLink>
+        </li>
+        <li>
+          <NavLink to='/surveys/new'>New survey</NavLink>
+        </li>
+      </ul>
     </nav>    
   )
 }

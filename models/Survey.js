@@ -3,7 +3,7 @@ const { Schema } = mongoose
 const RecipientSchema = require('./Recipient')
 
 const SurveySchema = new Schema({
-  _userL: {
+  _user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
   },
@@ -22,11 +22,11 @@ const SurveySchema = new Schema({
   recipients: {
     type: [RecipientSchema]
   },
-  positiveFeedback: {
+  yes: {
     type: Number,
     default: 0
   },
-  negativeFeedback: {
+  no: {
     type: Number,
     default: 0
   },

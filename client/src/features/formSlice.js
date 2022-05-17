@@ -5,7 +5,7 @@ const formSlice = createSlice({
   initialState: {
     title: '',
     subject: '',
-    body: 'default body',
+    body: '',
     recipients: [],
     email_template: 'basic'
   },
