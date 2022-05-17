@@ -12,11 +12,10 @@ const surveysSlice = createSlice({
   initialState: [],
   reducers: {},
   extraReducers: {
-    [fetchSurveys.pending]: state => null,
-    [fetchSurveys.fulfilled]: (state, {payload}) => payload || false,
-    [fetchSurveys.rejected]: (state, {payload}) => {
-      state = false
-    }
+    [fetchSurveys.pending]: state => [],
+    [fetchSurveys.fulfilled]: (state, {payload}) => payload || [],
+    [fetchSurveys.rejected]: (state, {payload}) => []
+    
   }
 })
 

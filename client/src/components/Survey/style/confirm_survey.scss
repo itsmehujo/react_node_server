@@ -1,0 +1,19 @@
+@import '../../GLOBAL_STYLE/variables.scss';
+
+.button {
+  margin: 1em 0;
+
+  button {
+    padding: 0.5em 1em;
+    cursor: pointer;
+    background-color: $yellow;
+    border-radius: 5px;
+  }
+
+  &:last-child {
+    button {
+
+      background-color: $blue;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react'
 import {BrowserRouter, Routes, Route} from 'react-router-dom'
-import {useDispatch, useSelector} from 'react-redux'
+import {useDispatch} from 'react-redux'
 
 import {Header, Footer, Page, Error404} from './Functional'
 import {ChooseTokens, Payment, StripeSuccess} from './Payment'
@@ -10,18 +10,14 @@ import Home from './Home'
 
 
 import './GLOBAL_STYLE/main.scss';
-import { fetchSurveys, fetchUser } from '../features/'
+import { fetchUser } from '../features/'
 
 const App = () => {
   const dispatch = useDispatch()
-  const profile = useSelector(state => state.auth)
   
 
   useEffect(() => {
     dispatch(fetchUser())
-    if(profile) {
-      dispatch(fetchSurveys())
-    }
   }, [])
 
   return(
